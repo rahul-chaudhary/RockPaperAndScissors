@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyColor {
+class MyColors {
   Color clrBlueGrayDarker = const Color(0xff222831); //clr means color
   Color clrBlueGray = const Color(0xff393E46);
   Color clrTeal = const Color(0xff00ADB5);

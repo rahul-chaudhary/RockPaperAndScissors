@@ -1,7 +1,8 @@
 import 'dart:math';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rps/colors.dart';
+import 'package:rps/toast_message.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        textTheme: GoogleFonts.courierPrimeTextTheme(
+          //latoTextTheme
+          Theme.of(context).textTheme,
+        ),
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(),
@@ -30,97 +35,83 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Color clrBlueGrayDarker = const Color(0xff222831); //clr means color
-  Color clrBlueGray = const Color(0xff393E46);
-  Color clrTeal = const Color(0xff00ADB5);
-  Color clrGreen = const Color(0xff00B57F);
-  Color clrGrey = const Color(0xffe4e4e4);
-  Color clrRedBold = const Color(0xffB50031);
   int selected = 1;
   bool newGame = false;
   var ran = Random();
-  String AITxt = "🤖";
+  String aiTxt = "🤖";
   String gameStatus = " ";
 
   @override
   Widget build(BuildContext context) {
-    Color clrTopBarColor = clrBlueGrayDarker;
-    void showToastMessage(String message) {
-      Fluttertoast.showToast(
-          msg: message, //message to show toast
-          //toastLength: Toast.LENGTH_LONG, //duration for message to show
-          gravity: ToastGravity.TOP, //where you want to show, top, bottom
-          //timeInSecForIosWeb: 1, //for iOS only
-          //backgroundColor: Colors.red, //background Color for message
-          textColor: Colors.white, //message text color
-          fontSize: 16.0 //message font size
-          );
-    }
+    MyColors clr = MyColors(); //MyColors object
+    ToastMessage toastMsg = ToastMessage();
+
+    Color clrTopBarColor = clr.clrBlueGrayDarker;
 
     if (newGame == true) {
       switch (selected) {
         case 1:
-          int AI = ran.nextInt(3) + 1;
-          if (AI == 1) {
-            AITxt = "💎";
+          int ai = ran.nextInt(3) + 1;
+          if (ai == 1) {
+            aiTxt = "💎";
             gameStatus = "It's Draw😐";
-            clrTopBarColor = clrBlueGrayDarker;
-            showToastMessage("AI-> Rock: Draw");
-          } else if (AI == 2) {
+            clrTopBarColor = clr.clrBlueGrayDarker;
+            toastMsg.showToastMessage("AI-> Rock: Draw");
+          } else if (ai == 2) {
             gameStatus = "You lost😭";
-            clrTopBarColor = clrRedBold;
-            AITxt = "🧻";
-            showToastMessage("AI->Paper: You lose");
-          } else if (AI == 3) {
+            clrTopBarColor = clr.clrRedBold;
+            aiTxt = "🧻";
+            toastMsg.showToastMessage("AI->Paper: You lose");
+          } else if (ai == 3) {
             gameStatus = "You won😎";
-            clrTopBarColor = clrGreen;
-            AITxt = "✂️";
-            showToastMessage("AI->Scissors: You win");
+            clrTopBarColor = clr.clrGreen;
+            aiTxt = "✂️";
+            toastMsg.showToastMessage("AI->Scissors: You win");
           }
           break;
 
         case 2:
-          int AI = ran.nextInt(3) + 1;
-          if (AI == 1) {
-            AITxt = "💎";
-            clrTopBarColor = clrGreen;
+          int ai = ran.nextInt(3) + 1;
+          if (ai == 1) {
+            aiTxt = "💎";
+            clrTopBarColor = clr.clrGreen; //green
             gameStatus = "You won😎";
-            showToastMessage("AI->Rock: You win");
-          } else if (AI == 2) {
-            AITxt = "🧻";
-            clrTopBarColor = clrBlueGrayDarker;
+            toastMsg.showToastMessage("AI->Rock: You win");
+          } else if (ai == 2) {
+            aiTxt = "🧻";
+            clrTopBarColor = clr.clrBlueGrayDarker; //draw color
             gameStatus = "It's Draw😐";
-            showToastMessage("AI->Paper: Draw");
-          } else if (AI == 3) {
-            AITxt = "✂️";
-            clrTopBarColor = clrRedBold;
+            toastMsg.showToastMessage("AI->Paper: Draw");
+          } else if (ai == 3) {
+            aiTxt = "✂️";
+            clrTopBarColor = clr.clrRedBold;
             gameStatus = "You lost😭";
-            showToastMessage("AI->Scissors: You lose");
+            toastMsg.showToastMessage("AI->Scissors: You lose");
           }
           break;
         case 3:
-          int AI = ran.nextInt(3) + 1;
-          if (AI == 1) {
-            AITxt = "💎";
+          int ai = ran.nextInt(3) + 1;
+          if (ai == 1) {
+            aiTxt = "💎";
             gameStatus = "You lost😭";
-            clrTopBarColor = clrRedBold;
-            showToastMessage("AI->Rock: You lose");
-          } else if (AI == 2) {
-            AITxt = "🧻";
-            clrTopBarColor = clrGreen;
+            clrTopBarColor = clr.clrRedBold;
+            toastMsg.showToastMessage("AI->Rock: You lose");
+          } else if (ai == 2) {
+            aiTxt = "🧻";
+            clrTopBarColor = clr.clrGreen;
             gameStatus = "You won😎";
-            showToastMessage("AI->Paper: You win");
-          } else if (AI == 3) {
-            AITxt = "✂️";
+            toastMsg.showToastMessage("AI->Paper: You win");
+          } else if (ai == 3) {
+            aiTxt = "✂️";
             gameStatus = "It's Draw😐";
-            clrTopBarColor = clrBlueGrayDarker;
-            showToastMessage("AI->Scissors: Draw");
+            clrTopBarColor = clr.clrBlueGrayDarker;
+            toastMsg.showToastMessage("AI->Scissors: Draw");
           }
           break;
       }
     }
     return Scaffold(
-      backgroundColor: clrBlueGray,
+      backgroundColor: clr.clrBlueGray,
       body: SafeArea(
         child: Column(
           children: [
@@ -131,27 +122,31 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(
                 gameStatus,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: clrGrey),
+                style: TextStyle(
+                  fontSize: 44,
+                  color: clr.clrGrey,
+                ),
               ),
             ),
             const SizedBox(height: 25),
             Text(
-              AITxt,
-              style: const TextStyle(
-                fontSize: 80.0,
+              aiTxt,
+              style: GoogleFonts.courierPrime(
+                fontSize: 80,
+                color: clr.clrGrey,
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Container(
               width: 120,
               height: 60,
-              color: clrBlueGrayDarker,
+              color: clr.clrBlueGrayDarker,
               child: Text(
                 "AI",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  color: clrGrey,
+                style: GoogleFonts.courierPrime(
+                  fontSize: 50,
+                  color: clr.clrGrey,
                 ),
               ),
             ),
@@ -203,27 +198,33 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: 120,
               height: 50,
-              color: clrBlueGrayDarker,
+              color: clr.clrBlueGrayDarker,
               child: Text(
                 "You",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  color: clrGrey,
+                style: GoogleFonts.courierPrime(
+                  fontSize: 44,
+                  color: clr.clrGrey,
                 ),
+
+                // TextStyle(
+                //   fontSize: 44,
+                //   fontFamily: ,
+                //   color: clr.clrGrey,
+                // ),
               ),
             ),
             const SizedBox(height: 30),
             Container(
               width: double.infinity,
               height: 60,
-              color: clrTeal,
+              color: clr.clrTeal,
               child: Text(
                 "New game",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 24,
-                  color: clrGrey,
+                  fontSize: 44,
+                  color: clr.clrGrey,
                 ),
               ),
             ),
