@@ -131,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 25),
             Text(
               aiTxt,
-              style: GoogleFonts.courierPrime(
+              style: TextStyle(
                 fontSize: 80,
                 color: clr.clrGrey,
               ),
@@ -144,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(
                 "AI",
                 textAlign: TextAlign.center,
-                style: GoogleFonts.courierPrime(
+                style: TextStyle(
                   fontSize: 50,
                   color: clr.clrGrey,
                 ),
@@ -202,16 +202,10 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(
                 "You",
                 textAlign: TextAlign.center,
-                style: GoogleFonts.courierPrime(
+                style: TextStyle(
                   fontSize: 44,
                   color: clr.clrGrey,
                 ),
-
-                // TextStyle(
-                //   fontSize: 44,
-                //   fontFamily: ,
-                //   color: clr.clrGrey,
-                // ),
               ),
             ),
             const SizedBox(height: 30),
