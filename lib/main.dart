@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int selected = 1;
+  int selected = 0;
   bool newGame = false;
   var ran = Random();
   String aiTxt = "🤖";
@@ -50,6 +50,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (newGame == true) {
       switch (selected) {
+        case 0:
+          aiTxt = "🤖";
+          break;
         case 1:
           int ai = ran.nextInt(3) + 1;
           if (ai == 1) {
@@ -213,13 +216,18 @@ class _MyHomePageState extends State<MyHomePage> {
               width: double.infinity,
               height: 60,
               color: clr.clrTeal,
-              child: Text(
-                "New game",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 44,
-                  color: clr.clrGrey,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  primary: clr.clrGrey,
+                  textStyle: GoogleFonts.courierPrime(fontSize: 44),
                 ),
+                onPressed: () {
+                  setState(() {
+                    selected = 0;
+                    gameStatus = " ";
+                  });
+                },
+                child: const Text("New game"),
               ),
             ),
           ],
